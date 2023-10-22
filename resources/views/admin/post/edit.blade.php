@@ -14,30 +14,57 @@
                         <div class="tab-pane active show">
                             <div id="profile-log-switch">
                                 <div class="card-header">
-                                    <h3 class="card-title">Edit User</h3>
+                                    <h3 class="card-title">Edit Post</h3>
                                 </div>
                                 <br>
-                                <form action="{{route('users.update',[$user->id])}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{route('posts.update',[$post->id])}}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     {{ method_field('PUT') }}
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="form-label">Name *</label>
-                                                <input type="text" class="form-control" name="name" value="{{ $user->name }}" required placeholder="Name">
+                                                <input type="text" class="form-control" name="name" value="{{ $post->name }}" placeholder="Name" required>
                                             </div>
+                                            @if ($errors->has('name'))
+                                            <span class="text-danger errbk">{{ $errors->first('name') }}</span>
+                                            @endif
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="form-label">Email *</label>
-                                                <input type="text" class="form-control" name="email" value="{{ $user->email }}" required placeholder="Email">
+                                                <label class="form-label">Author *</label>
+                                                <input type="text" class="form-control" name="author" value="{{$post->author }}" placeholder="author" required>
                                             </div>
+                                            @if ($errors->has('author'))
+                                            <span class="text-danger errbk">{{ $errors->first('author') }}</span>
+                                            @endif
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="form-label">Password</label>
-                                                <input type="password" class="form-control" name="password" placeholder="Password">
+                                                <label class="form-label">Date *</label>
+                                                <input type="date" class="form-control" id="date" name="date" value="{{$post->date }}" placeholder="date" required>
                                             </div>
+                                            @if ($errors->has('date'))
+                                            <span class="text-danger errbk">{{ $errors->first('date') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label class="form-label">Content *</label>
+                                                <textarea cols="30" rows="5" class="ckeditor form-control" name="content" value="{{$post->content }}">{{ $post->content }}</textarea>
+                                            </div>
+                                            @if ($errors->has('content'))
+                                            <span class="text-danger errbk">{{ $errors->first('content') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Image *</label>
+                                                <input type="file" class="form-control" name="image" value="{{$post->image }}" placeholder="image" required>
+                                            </div>
+                                            @if ($errors->has('image'))
+                                            <span class="text-danger errbk">{{ $errors->first('image') }}</span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row">
@@ -61,6 +88,7 @@
 </div>
 @endsection
 @section('js')
+<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <script src="{{asset('assets/js/form-elements.js')}}"></script>
 <script src="{{asset('assets/plugins/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 <script src="{{asset('assets/plugins/select2/select2.full.min.js')}}"></script>

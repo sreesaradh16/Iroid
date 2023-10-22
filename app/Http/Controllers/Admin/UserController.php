@@ -20,7 +20,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('admin.user.index', [
             'users' => User::get()
@@ -91,11 +91,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable',
-            'image' => 'nullable||file|max:2048',
         ], [
-            'admin_name.required' => 'Name is required',
-            'role.required' => 'Role is required',
-            'username.required' => 'Username is required',
+            'name.required' => 'Name is required',
             'email.required' => 'Email is required',
         ]);
 

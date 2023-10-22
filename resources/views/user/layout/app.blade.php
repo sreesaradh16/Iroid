@@ -65,11 +65,11 @@
         <div class="page-main">
 
             <!-- side menu starts -->
-            @include('admin.layout.side-menu')
+            @include('user.layout.side-menu')
             <!-- side menu ends -->
 
             <!-- Mobile Header -->
-            @include('admin.layout.mobile-header')
+            @include('user.layout.mobile-header')
             <!-- /Mobile Header -->
 
             <!--app-content open-->
@@ -78,7 +78,7 @@
                 <div class="side-app">
 
                     <!-- PAGE-HEADER -->
-                    @include('admin.layout.header')
+                    @include('user.layout.header')
                     <!-- PAGE-HEADER END -->
 
                     <!-- content starts -->
@@ -90,7 +90,7 @@
         </div>
 
         <!-- FOOTER -->
-        @include('admin.layout.footer')
+        @include('user.layout.footer')
         <!-- FOOTER END -->
     </div>
 
@@ -138,7 +138,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
-    @include('admin.common.message')
+    @include('user.common.message')
 
     <script>
         $(document).on("click", 'a.frmsubmit', function(e) {

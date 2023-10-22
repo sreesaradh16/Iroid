@@ -14,17 +14,12 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'email',
-        'image',
-        'password',
     ];
 
-    protected $hidden = ['password', 'created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at'];
 
-    protected $appends = ['image_url'];
-
-    public function getImageUrlAttribute()
+    public function posts()
     {
-        return Storage::disk('public')->url($this->image);
+        return $this->belongsToMany(Category::class, 'postcategories', 'category_id', 'post_id');
     }
 }

@@ -13,8 +13,7 @@ class Post extends Model
     protected $table = 'posts';
 
     protected $fillable = [
-        'category_id',
-        'author_id',
+        'author',
         'name',
         'date',
         'content',
@@ -30,8 +29,8 @@ class Post extends Model
         return Storage::disk('public')->url($this->image);
     }
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->belongsToMany(Post::class, 'postcategories', 'post_id', 'category_id');
     }
 }

@@ -27,17 +27,6 @@ class UserRepository
         $user->name  = $data['name'];
         $user->email  = $data['email'];
 
-        if (isset($data['image']) && $data['image']->isValid()) {
-            //delete old file
-            if ($user->image) {
-                Storage::disk('public')->delete($user->image);
-            }
-            //store new file
-            $path = $data['image']->store('user', 'public');
-
-            $user->image = $path;
-        }
-
         if (isset($data['password'])) {
             $user->password = Hash::make($data['password']);
         }

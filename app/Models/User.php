@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $table = 'users';
 
@@ -16,15 +16,7 @@ class User extends Model
         'name',
         'email',
         'password',
-        'image'
     ];
 
     protected $hidden = ['password', 'created_at', 'updated_at'];
-
-    protected $appends = ['image_url'];
-
-    public function getImageUrlAttribute()
-    {
-        return Storage::disk('public')->url($this->image);
-    }
 }

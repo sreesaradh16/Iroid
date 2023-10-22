@@ -12,12 +12,12 @@
                     <div class="col-12">
                         <div class="col-lg-12">
                             <div class="card-header">
-                                <h3 class="mb-0 card-title">List Users</h3>
+                                <h3 class="mb-0 card-title">List Category</h3>
                             </div>
                             <div class="card-body">
                                 <hr>
-                                <a href="{{route('users.create')}}" class="btn btn-block btn-info">
-                                    <i class="fa fa-plus"></i> Create User </a>
+                                <a href="{{route('categories.create')}}" class="btn btn-block btn-info">
+                                    <i class="fa fa-plus"></i> Create category </a>
                                 </br>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -26,19 +26,17 @@
                                                 <tr>
                                                     <th>Sl.No</th>
                                                     <th>Name</th>
-                                                    <th>Email</th>
                                                     <th class="no-sort">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($users as $key=>$user)
+                                                @foreach ($categories as $key=>$category)
                                                 <tr>
                                                     <td>{{ $key+1 }}</td>
-                                                    <td>{{ $user->name}}</td>
-                                                    <td>{{ $user->email}}</td>
+                                                    <td>{{ $category->name}}</td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-cyan" href="{{route('users.edit',[$user->id])}}"><i class="fa fa-edit"></i> Edit</a>
-                                                        <a class="btn btn-sm btn-red btn-action frmsubmit" href="{{route('users.destroy',[$user->id])}}" method="DELETE"><i class="fa fa-trash"></i> Delete</a>
+                                                        <a class="btn btn-sm btn-cyan" href="{{route('categories.edit',[$category->id])}}"><i class="fa fa-edit"></i> Edit</a>
+                                                        <a class="btn btn-sm btn-red btn-action frmsubmit" href="{{route('categories.destroy',[$category->id])}}" method="DELETE"><i class="fa fa-trash"></i> Delete</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

@@ -15,13 +15,7 @@
      </div>
      <ul class="side-menu">
          <li class="slide">
-             <a class="side-menu__item @yield('users')" href="{{route('users.index')}}"><i class="side-menu__icon ti-user"></i><span class="side-menu__label">Users</span></a>
-         </li>
-         <li class="slide">
-             <a class="side-menu__item @yield('category')" href="{{route('categories.index')}}"><i class="side-menu__icon ti-shield"></i><span class="side-menu__label">Categories</span></a>
-         </li>
-         <li class="slide">
-             <a class="side-menu__item @yield('posts')" href="{{route('posts.index')}}"><i class="side-menu__icon ti-support"></i><span class="side-menu__label">Posts</span></a>
+             <a class="side-menu__item @yield('admin')" href=""><i class="side-menu__icon ti-home"></i><span class="side-menu__label">Posts</span></a>
          </li>
      </ul>
  </aside>
