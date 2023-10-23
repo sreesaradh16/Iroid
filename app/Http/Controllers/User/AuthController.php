@@ -10,8 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('guest:user')->except('logout');
+    }
+    protected function guard()
+    {
+        return Auth::guard('user');
     }
     public function viewLogin()
     {
@@ -64,7 +69,7 @@ class AuthController extends Controller
         if (Auth::guard('user')->attempt($credentials)) {
             $request->session()->regenerate();
             $request->session()->flash('success', 'Successfully logged in');
-            return redirect()->route('user.posts.index')->with('success', 'Successfully logged in');
+            return redirect()->route('user.dashboard')->with('success', 'Successfully logged in');
         } else {
             $request->session()->flash('error_login', 'The provided credentials do not match our records.');
             return redirect()->route('user.login')->withInput();
