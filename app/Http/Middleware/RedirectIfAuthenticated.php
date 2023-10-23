@@ -20,8 +20,11 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
+            if ($guard == "admin" && Auth::guard($guard)->check()) {
+                return redirect('login'); //name of the route to be redirected on successful admin login
+            }
             if (Auth::guard($guard)->check()) {
-                return redirect()->route('user.users.index');
+                return redirect('user.login'); //name of the route to be redirected on successful user login
             }
         }
 

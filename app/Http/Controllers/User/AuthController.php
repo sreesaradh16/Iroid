@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
+    public function __construct(){
+        $this->middleware('guest:user')->except('logout');
+    }
     public function viewLogin()
     {
         return view('user.auth.login');

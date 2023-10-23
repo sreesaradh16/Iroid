@@ -59,18 +59,13 @@ Route::middleware(['guest:user'])->group(function () {
     Route::post('update-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('password.update');
 });
 
-Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('user.dashboard');
-Route::post('search-post', [DashboardController::class, 'searchPost'])->name('user.search.post');
-Route::post('add/category/post', [DashboardController::class, 'addCategoriesToPost'])->name('user.add.category.post');
-
-//posts
-Route::resource('posts', UserPostController::class)->names('posts');
 
 Route::middleware(['auth:user'])->group(function () {
-
+    
     //dashboard
-
-    //posts
+    Route::get('/', [DashboardController::class, 'dashboard'])->name('user.dashboard');
+    Route::post('search-post', [DashboardController::class, 'searchPost'])->name('user.search.post');
+    Route::post('add/category/post', [DashboardController::class, 'addCategoriesToPost'])->name('user.add.category.post');
     Route::resource('posts', UserPostController::class)->names('user.posts');
 
     //logout

@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="ml-auto pageheader-btn">
-                            <a href="#" class="btn btn-success btn-icon text-white mr-2">
+                            <a href="{{route('user.posts.create')}}" class="btn btn-success btn-icon text-white mr-2">
                                 <span>
                                     <i class="fe fe-plus"></i>
                                 </span> Add Post
@@ -175,9 +175,6 @@
                         <div class="col-md-4">
                             <div class="card">
                                 <img class="card-img-topbr-tr-0 br-tl-0" src="{{ $post->image_url }}" height="300px" alt="Card image cap">
-                                <div class="card-header">
-                                    <h6 class="card-dsc">Categories - {{ implode (",", $cats) }}</h6>
-                                </div>
                                 <div class="card-body">
                                     <p class="card-text">{!! $post->content !!}</p>
                                     <a href="#" class="float-right">{{ Carbon\Carbon::parse($post->date)->format('d M Y ')  }}</a>

@@ -31,39 +31,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'date' => 'required',
-            'author' => 'required',
-            'content' => 'required',
-            'image' => 'nullable||file|max:2048',
-        ], [
-            'name.required' => 'Name is required',
-            'date.required' => 'Date is required',
-            'author.required' => 'Author is required',
+
+
+        $path = (isset($request->image) && $request->image->isValid() ? $request->image->store('post', 'public') : null);
+
+        Post::create([
+            'author' => $request->author,
+            'name' => $request->name,
+            'date' => $request->date,
+            'content' => $request->content,
+            'image' => $path,
         ]);
 
-        DB::beginTransaction();
-        try {
 
-            $path = (isset($request->image) && $request->image->isValid() ? $request->image->store('post', 'public') : null);
-
-            Post::create([
-                'category_id' => $request->category_id,
-                'author_id' => $request->author_id,
-                'name' => $request->name,
-                'date' => $request->date,
-                'content' => $request->content,
-                'image' => $path,
-            ]);
-        } catch (\Exception $e) {
-            DB::rollback();
-            $request->session()->flash('error', 'Something Went Wrong');
-            return redirect()->route('user.posts.index');
-        }
-        DB::commit();
-        $request->session()->flash('success', 'User created successfully');
-        return redirect()->route('user.posts.index');
+        return redirect()->route('user.dashboard');
     }
 
     /**
@@ -77,67 +58,5 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
-    {
-        $response = array();
-        if (!empty($post)) {
-
-            $response['category_id'] = $post->category_id;
-            $response['author_id'] = $post->author_id;
-            $response['name'] = $post->name;
-            $response['date'] = $post->date;
-            $response['content'] = $post->content;
-
-            $response['success'] = 1;
-        } else {
-            $response['success'] = 0;
-        }
-
-        return response()->json($response);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Post $post)
-    {
-        $response = array();
-        if (!empty($user)) {
-            $update['category_id'] = $request->post('category_id');
-            $update['author_id'] = $request->post('author_id');
-            $update['name'] = $request->post('name');
-            $update['content'] = $request->post('content');
-            $update['date'] = $request->post('date');
-
-            if ($user->update($update)) {
-                $response['success'] = 1;
-                $response['msg'] = 'Update successfully';
-            } else {
-                $response['success'] = 0;
-                $response['msg'] = 'Record not updated';
-            }
-        } else {
-            $response['success'] = 0;
-            $response['msg'] = 'Invalid ID.';
-        }
-
-        return response()->json($response);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Request $request, Post $post)
-    {
-
-        if ($post->delete()) {
-            $response['success'] = 1;
-            $response['msg'] = 'Delete successfully';
-        } else {
-            $response['success'] = 0;
-            $response['msg'] = 'Invalid ID.';
-        }
-
-        return response()->json($response);
-    }
+    
 }
